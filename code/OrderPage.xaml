@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Kinza.Pages.OrderPage"
+    xmlns:resources="clr-namespace:Kinza.Resources;assembly=Kinza"
+    xmlns:controls="clr-namespace:Kinza.Controls;assembly=Kinza"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    NavigationPage.HasNavigationBar="False">
+    <StackLayout
+        Orientation="Vertical">
+        <controls:CustomToolbar
+            Title="{x:Static resources:Strings.TitleBack}"
+            Count="{Binding CountBasket}"
+            BackgroundColor="{StaticResource GreenColor}"
+            TitleColor="{StaticResource WhiteColor}"
+            VerticalOptions="Start"
+            LeftImageSource="back"
+            LeftCommand="{Binding OnTapBackCommand}"
+            RightImageSource="Basket"
+            RightCommand="{Binding OnTapBasketCommand}" />
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <ScrollView
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                IsClippedToBounds="True">
+
+                <StackLayout
+                    Style="{StaticResource DefaultLayoutStyle}">
+                    <Label
+                        Style="{StaticResource AddressLabelStyle}"
+                        Text="Адрес (Предыдущие заказы)" />
+                    <Picker
+                        ItemsSource="{Binding AddressItems}"
+                        SelectedIndex="{Binding AddressSelectedIndex}"
+                        HorizontalOptions="FillAndExpand" />
+                    <Label
+                        Style="{StaticResource AddressLabelStyle}"
+                        Text="{x:Static resources:Strings.AddressPage_StreetLabel}" />
+                    <controls:ExtendedEntry
+                        x:Name="Street"
+                        Text="{Binding Street}"
+                        Placeholder="{x:Static resources:Strings.AddressPage_StreetPlaceHolder}"
+                        PlaceholderColor="{StaticResource PlaceHolderColor}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                Height="Auto" />
+                            <RowDefinition
+                                Height="Auto" />
+                            <RowDefinition
+                                Height="Auto" />
+                            <RowDefinition
+                                Height="Auto" />
+                            <RowDefinition
+                                Height="Auto" />
+                            <RowDefinition
+                                Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Style="{StaticResource AddressLabelStyle}"
+                            Text="{x:Static resources:Strings.AddressPage_HomeLabel}"
+                            Grid.Column="0"
+                            Grid.Row="0" />
+                        <controls:ExtendedEntry
+                            x:Name="Home"
+                            Text="{Binding Home}"
+                            Placeholder="{x:Static resources:Strings.AddressPage_DefaultPlaceHolder}"
+                            PlaceholderColor="{StaticResource PlaceHolderColor}"
+                            Grid.Column="0"
+                            Grid.Row="1" />
+
+                        <Label
+                            Style="{StaticResource AddressLabelStyle}"
+                            Text="{x:Static resources:Strings.AddressPage_EntranceLabel}"
+                            Grid.Column="0"
+                            Grid.Row="2" />
+                        <controls:ExtendedEntry
+                            Text="{Binding Entrance}"
+                            Placeholder="{x:Static resources:Strings.AddressPage_DefaultPlaceHolder}"
+                            PlaceholderColor="{StaticResource PlaceHolderColor}"
+                            Grid.Column="0"
+                            Grid.Row="3" />
+
+
+                        <StackLayout
+                            Grid.Column="0"
+                            Grid.Row="4"
+                            Orientation="Vertical">
+                            <Label
+                                Style="{StaticResource AddressLabelStyle}"
+                                Text="{x:Static resources:Strings.AddressPage_ApartamentLabel}" />
+                            <controls:ExtendedEntry
+                                Text="{Binding Apartament}"
+                                Placeholder="{x:Static resources:Strings.AddressPage_DefaultPlaceHolder}"
+                                PlaceholderColor="{StaticResource PlaceHolderColor}" />
+                        </StackLayout>
+                        <Label
+                            Style="{StaticResource AddressLabelStyle}"
+                            Text="{x:Static resources:Strings.AddressPage_HousingLabel}"
+                            Grid.Column="1"
+                            Grid.Row="0" />
+                        <controls:ExtendedEntry
+                            Text="{Binding Housing}"
+                            Placeholder="{x:Static resources:Strings.AddressPage_DefaultPlaceHolder}"
+                            PlaceholderColor="{StaticResource PlaceHolderColor}"
+                            Grid.Column="1"
+                            Grid.Row="1" />
+
+
+                        <Label
+                            Style="{StaticResource AddressLabelStyle}"
+                            Text="{x:Static resources:Strings.AddressPage_FloorLabel}"
+                            Grid.Column="1"
+                            Grid.Row="2" />
+
+                        <controls:ExtendedEntry
+                            Text="{Binding Floor}"
+                            Placeholder="{x:Static resources:Strings.AddressPage_DefaultPlaceHolder}"
+                            PlaceholderColor="{StaticResource PlaceHolderColor}"
+                            Grid.Column="1"
+                            Grid.Row="3" />
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.Row="4"
+                            Orientation="Horizontal"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Fill">
+                            <Label
+                                Style="{StaticResource AddressLabelStyle}"
+                                Text="{x:Static resources:Strings.AddressPage_IntercomLabel}" />
+
+
+                            <Switch
+                                HorizontalOptions="Center"
+                                IsToggled="{Binding Intercom}" />
+                        </StackLayout>
+                    </Grid>
+                    <maps:Map
+                        HeightRequest="200"
+                        x:Name="mapName">
+                    </maps:Map>
+                    <Label
+                        Style="{StaticResource AddressLabelStyle}"
+                        Text="{x:Static resources:Strings.AddressPage_CommentLabel}" />
+
+                    <controls:ExtendedEntry
+                        Text="{Binding Comment}" />
+                    <Label
+                        Style="{StaticResource AddressLabelStyle}"
+                        Text="Оплата" />
+                    <Picker
+                        ItemsSource="{Binding PaySource}"
+                        SelectedIndex="{Binding PaySelectedIndex}"
+                        HorizontalOptions="FillAndExpand" />
+                    <Label
+                        Text="Выберите банковскую карту"
+                        IsVisible="{Binding CardVisible}" />
+                    <Picker
+                        ItemsSource="{Binding ItemsCards}"
+                        SelectedIndex="{Binding CardsSelectedIndex}"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding CardVisible}" />
+                    <ActivityIndicator
+                        IsVisible="{Binding IsLoading}"
+                        IsRunning="{Binding IsLoading}"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        WidthRequest="56"
+                        HeightRequest="56" />
+                    <Button
+                        Style="{StaticResource AcceptButtonStyle}"
+                        Text="{x:Static resources:Strings.OrderPage_CreateOrder}"
+                        Command="{Binding ConfirmOrder}" />
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
